@@ -25,7 +25,7 @@ DEMO_NAME=resnet50_gpu_fp16
 
 WITH_MKL=ON
 WITH_GPU=ON
-USE_TENSORRT=ON
+USE_TENSORRT=OFF
 WITH_SHARED_PHI=ON
 
 LIB_DIR=${work_path}/../../lib/paddle_inference

@@ -46,18 +46,26 @@ std::shared_ptr<Predictor> InitPredictor() {
     config.EnableUseGpu(100, 0);
   } else if (FLAGS_use_gpu_fp16) {
     config.EnableUseGpu(100, 0, PrecisionType::kHalf);
-  } else if (FLAGS_use_xpu) {
-    config.EnableXpu();
-  } else if (FLAGS_use_npu) {
-    config.EnableNpu();
-  } else if (FLAGS_use_ipu) {
-    config.EnableIpu();
+  // } else if (FLAGS_use_xpu) {
+  //   config.EnableXpu();
+  // } else if (FLAGS_use_npu) {
+  //   config.EnableNpu();
+  // } else if (FLAGS_use_ipu) {
+  //   config.EnableIpu();
   } else {
     config.EnableMKLDNN();
   }
 
   // Open the memory optim.
   config.EnableMemoryOptim();
+
+  // new setting
+  config.SetOptimCacheDir("./optim_cache");
+  config.EnableNewExecutor(true);
+  config.EnableNewIR(true);
+  config.SetOptimizationLevel(1);
+  std::vector<std::string> passes = {"auto_mixed_precision_pass"};
+  config.SwitchIrDebug(true, passes);
   return CreatePredictor(config);
 }
 

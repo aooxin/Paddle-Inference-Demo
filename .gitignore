@@ -10,3 +10,5 @@ lib/
 */CMakeLists.txt
 
 build/
+c++/gpu/resnet50/resnet50/
+c++/gpu/gpu_fp16/resnet50/
